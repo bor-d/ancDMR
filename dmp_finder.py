@@ -11,11 +11,8 @@ import scipy.stats as st
 #import sys
 
 #directory with files for exact chrom
-#list_dir = sys.argv[1]
-#chrom = sys.argv[2]
-
-list_dir = "~/Documents/Bioinf/Hunters-Gatherers/Diffmeth/test chr1/"
-chrom = 'chr1'
+list_dir = sys.argv[1]
+chrom = sys.argv[2]
 
 sample_sheet = pd.DataFrame(pd.read_csv("sample_file.txt", sep='\t', names = ['name', 'org', 'cov']))
 header = pd.Series('pos')
@@ -23,8 +20,8 @@ header = header.append(sample_sheet['name'])
 data = pd.DataFrame(pd.read_csv('shit.txt', sep = '\t', header=None, names=header, nrows = 150)).set_index('pos')
 
 #reading file for mean calculating
-#datafile = list_dir+"dmp_table.txt"
-#data = pd.read_csv(datafile, sep = '\t')
+datafile = list_dir+"dmp_table.txt"
+data = pd.read_csv(datafile, sep = '\t')
 
 #generating output with header
 write_ao = "pval_anc_obese.bed"
