@@ -7,7 +7,7 @@ Created on Sun May 29 21:13:45 2022
 
 import pandas as pd
 import numpy as np
-#import sys
+import sys
 
 #directory with files for exact chrom
 list_dir = sys.argv[1]
