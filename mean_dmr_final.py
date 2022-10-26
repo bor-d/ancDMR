@@ -9,11 +9,12 @@ import pandas as pd
 import numpy as np
 #import sys
 import warnings
-warnings.filterwarnings("ignore")
+#lots of warnings when no meth level available (RRBS data for 2 groups)
+#suggest ignore this NA warnings
+#warnings.filterwarnings("ignore")
 
-#list_dir = sys.argv[1]
-#chrom = sys.argv[2]
-list_dir = "~/Documents/Bioinf/Hunters-Gatherers/Diffmeth/test_chr1/"
+list_dir = sys.argv[1]
+chrom = sys.argv[2]
 
 sample_sheet = pd.DataFrame(pd.read_csv(list_dir+"sample_file.txt", sep='\t', 
                                           names=["name", "org", "cov"]))
@@ -75,7 +76,7 @@ def mean_adding(index, row):
         except KeyError:
             print(str(index)+' too many nans')
 
-
+#firstly calc means for each group at a position
 [mean_adding(index, row) for index, row in data.iterrows()]
 
 means_file = "mean_pos.txt"
@@ -113,9 +114,11 @@ def reg_mean(reg_start, reg_end):
     #   f.write(str(reg_start)+"\t"+str(reg_end)+"\t"+str(anc_reg_mean)+"\t"+str(obese_reg_mean)+'\t'+str(delta)+'\t'+str(reg_pval)+'\t'+str(n_probes)+"\n")
     #   f.close()
 
-
+#sort comb-p output
 reg_df_al.sort_values(by = 'start', inplace=True, ignore_index=True)
 #reg_df_ao.sort_values(by = 'start', inplace=True, ignore_index=True)
+
+#calculate region mean from position means
 
 [reg_mean(reg_start, reg_end) for reg_start, reg_end in zip(reg_df_al['start'], reg_df_al['end']) ]
                                                                                                    # reg_df_al['p_adj'], reg_df_al['n_probes'])]
